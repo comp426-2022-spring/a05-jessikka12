@@ -5,7 +5,7 @@ const app = express()
 const fs = require('fs')
 const morgan = require('morgan')
 const coin = require('./modules/coin')
-const Database = require('better-sqlite3')
+const db = require('./src/services/database.js')
 
 const args = require('minimist')(process.argv.slice(2), {
     default: {port: 5000, debug: false, log: true},
@@ -41,16 +41,6 @@ if (help) {
 const server = app.listen(port, () => {
     console.log('App listening on port %PORT%'.replace("%PORT%", port))
 })
-
-// create database
-const db = new Database("./data/db/log.db")
-
-// create table
-const sqlInit = `CREATE TABLE IF NOT EXISTS accesslog (id INTEGER PRIMARY KEY,
-        remoteaddr TEXT, remoteuser TEXT, time TEXT, method TEXT, url TEXT, protocol TEXT,
-        httpversion TEXT, secure TEXT, status INTEGER, referer TEXT, useragent TEXT
-    )`;
-db.exec(sqlInit)
 
 const addData = (req, res, next) => {
     let logdata = {
