@@ -2,6 +2,11 @@
 const express = require('express')
 const app = express()
 
+const fs = require('fs')
+const morgan = require('morgan')
+const coin = require('./modules/coin')
+const Database = require('better-sqlite3')
+
 const args = require('minimist')(process.argv.slice(2), {
     default: {port: 5000, debug: false, log: true},
     alias: {p: port, d: debug, l: log, h: help}
@@ -11,10 +16,6 @@ const help = args.help
 const port = args.port
 const debug = args.debug
 const log = args.log
-
-const coin = require('./modules/coin')
-
-
 
 if (help) {
     console.log(`
@@ -36,3 +37,71 @@ if (help) {
     process.exit(0)
 }
 
+// create app server
+const server = app.listen(port, () => {
+    console.log('App listening on port %PORT%'.replace("%PORT%", port))
+})
+
+// create database
+const db = new Database("./data/log.db")
+
+// create table
+const sqlInit = `CREATE TABLE IF NOT EXISTS accesslog (id INTEGER PRIMARY KEY,
+        remoteaddr TEXT, remoteuser TEXT, time TEXT, method TEXT, url TEXT, protocol TEXT,
+        httpversion TEXT, secure TEXT, status INTEGER, referer TEXT, useragent TEXT
+    )`;
+db.exec(sqlInit)
+
+const addData = (req, res, next) => {
+    let logdata = {
+        remoteaddr: req.ip,
+        remoteuser: req.user,
+        time: Date.now(),
+        method: req.method,
+        url: req.url,
+        protocol: req.protocol,
+        httpversion: req.httpVersion,
+        secure: req.secure,
+        status: res.statusCode,
+        referer: req.headers['referer'],
+        useragent: req.headers['user-agent']
+    }
+    const prep = db.prepare(`INSERT INTO accesslog (remoteaddr, remoteuser, time, method, url, protocol,
+        httpversion, secure, status, referer, useragent)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `)
+    prep.run(logdata.remoteaddr, logdata.remoteuser, logdata.time, logdata.method, logdata.url, 
+        logdata.protocol, logdata.httpversion, log.secure, logdata.status, logdata.referer, logdata.useragent)
+    next()
+}
+
+// middleware adds data to table
+app.use( (req, res, next) => {
+    addData(req, res, next)
+    res.status(200)
+})
+
+// if debug is true
+if (debug) {
+    // endpoint /app/log/access
+    app.get('/app/log/access', (req, res) => {
+        // return stuff in db
+        const getprep = db.prepare(`SELECT * FROM accesslog`).all()
+        res.status(200).json(getprep)
+    })
+
+    // endpoint /app/error
+    app.get('/app/error', (req, res) => {
+        // error out
+        throw new Error("Error test successful.")
+    })
+}
+
+// if log is true
+if (log == true) {
+    // Use morgan for logging to files
+    // Create a write stream to append (flags: 'a') to a file
+    const accessLog = fs.createWriteStream('./log/access.log', { flags: 'a' })
+    // Set up the access logging middleware
+    app.use(morgan('combined', { stream: accessLog }))
+}
