@@ -230,13 +230,20 @@ curl http://localhost:5000/app/log/access/
 #### Response body
 
 ```
-
+[{"id":1,"remoteaddr":"::ffff:127.0.0.1","remoteuser":null,"time":"1649605406289.0","method":"GET","url":"/app/","protocol":"http","httpversion":"1.1","status":"200.0","referer":null,"useragent":"curl/7.74.0"},{"id":2,"remoteaddr":"::ffff:127.0.0.1","remoteuser":null,"time":"1649605412523.0","method":"GET","url":"/app/log/access","protocol":"http","httpversion":"1.1","status":"200.0","referer":null,"useragent":"curl/7.74.0"}]
 ```
 
 #### Response headers
 
 ```
-
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 650
+ETag: W/"28a-rhf6pLcd80uBnzlvWEJYLdxTZps"
+Date: Sun, 10 Apr 2022 15:44:22 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
 ```
 
 ### /app/log/access/ (GET)
@@ -244,7 +251,7 @@ curl http://localhost:5000/app/log/access/
 #### Request cURL
 
 ```
-
+curl http://localhost:5000/app/log/access/
 ```
 
 #### Response body
