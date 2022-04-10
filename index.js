@@ -43,7 +43,7 @@ const server = app.listen(port, () => {
 })
 
 // create database
-const db = new Database("./data/log.db")
+const db = new Database("./data/db/log.db")
 
 // create table
 const sqlInit = `CREATE TABLE IF NOT EXISTS accesslog (id INTEGER PRIMARY KEY,
@@ -101,7 +101,8 @@ if (debug) {
 if (log == true) {
     // Use morgan for logging to files
     // Create a write stream to append (flags: 'a') to a file
-    const accessLog = fs.createWriteStream('./log/access.log', { flags: 'a' })
+    const accessLog = fs.createWriteStream('./data/log/access.log', { flags: 'a' })
     // Set up the access logging middleware
     app.use(morgan('combined', { stream: accessLog }))
 }
+
