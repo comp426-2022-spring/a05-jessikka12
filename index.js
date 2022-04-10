@@ -6,10 +6,11 @@ const fs = require('fs')
 const morgan = require('morgan')
 const coin = require('./modules/coin')
 const db = require('./src/services/database.js')
+const midware = require('./src/middleware/mymiddleware.js')
 
 const args = require('minimist')(process.argv.slice(2), {
     default: {port: 5000, debug: false, log: true},
-    alias: {p: port, d: debug, l: log, h: help}
+    alias: {p: 'port', d: 'debug', l: 'log', h: 'help'}
 })
 // initialize the args
 const help = args.help
@@ -42,32 +43,9 @@ const server = app.listen(port, () => {
     console.log('App listening on port %PORT%'.replace("%PORT%", port))
 })
 
-const addData = (req, res, next) => {
-    let logdata = {
-        remoteaddr: req.ip,
-        remoteuser: req.user,
-        time: Date.now(),
-        method: req.method,
-        url: req.url,
-        protocol: req.protocol,
-        httpversion: req.httpVersion,
-        secure: req.secure,
-        status: res.statusCode,
-        referer: req.headers['referer'],
-        useragent: req.headers['user-agent']
-    }
-    const prep = db.prepare(`INSERT INTO accesslog (remoteaddr, remoteuser, time, method, url, protocol,
-        httpversion, secure, status, referer, useragent)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `)
-    prep.run(logdata.remoteaddr, logdata.remoteuser, logdata.time, logdata.method, logdata.url, 
-        logdata.protocol, logdata.httpversion, log.secure, logdata.status, logdata.referer, logdata.useragent)
-    next()
-}
-
 // middleware adds data to table
 app.use( (req, res, next) => {
-    addData(req, res, next)
+    midware.addData(req, res, next)
     res.status(200)
 })
 
