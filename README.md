@@ -81,7 +81,14 @@ curl http://localhost:5000/app/flip/
 #### Response headers
 
 ```
-
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 16
+ETag: W/"10-N9e0DDykqBPnqphc8f4bzHcjsuM"
+Date: Sun, 10 Apr 2022 15:36:01 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
 ```
 
 ### /app/flips/:number/ (GET)
@@ -89,7 +96,7 @@ curl http://localhost:5000/app/flip/
 #### Request cURL
 
 ```
-curl http://localhost:5000/app/flips/:number/
+curl http://localhost:5000/app/flips/10/
 ```
 
 #### Response body
@@ -101,7 +108,14 @@ curl http://localhost:5000/app/flips/:number/
 #### Response headers
 
 ```
-
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 121
+ETag: W/"79-ASADpBbRRst6F1e6lzOUFHThC3Y"
+Date: Sun, 10 Apr 2022 15:38:43 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
 ```
 
 ### /app/flip/coin/ (GET)
@@ -129,7 +143,7 @@ curl http://localhost:5000/app/flip/coin/
 #### Request cURL
 
 ```
-curl http://localhost:5000/app/flip/call/:guess/
+curl http://localhost:5000/app/flip/call/heads/
 ```
 
 #### Response body
@@ -141,7 +155,14 @@ curl http://localhost:5000/app/flip/call/:guess/
 #### Response headers
 
 ```
-
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 46
+ETag: W/"2e-U/q8iZ4JKqczXPIvtwiVRpEFlRc"
+Date: Sun, 10 Apr 2022 15:39:45 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
 ```
 
 ### /app/flip/call/ (POST)
