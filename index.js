@@ -77,7 +77,7 @@ if (log == true) {
 
 // define get endpoints
 app.get('/app/', (req, res) => {
-    res.json({'message': "API working"})
+    res.json({"message":"Your API works! (200)"})
     res.status(200)
 })
 

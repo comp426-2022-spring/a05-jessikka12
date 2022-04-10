@@ -75,7 +75,7 @@ curl http://localhost:5000/app/flip/
 #### Response body
 
 ```
-
+{"flip":"tails"}
 ```
 
 #### Response headers
@@ -95,7 +95,7 @@ curl http://localhost:5000/app/flips/:number/
 #### Response body
 
 ```
-
+{"raw":["heads","tails","tails","tails","heads","heads","heads","heads","tails","heads"],"summary":{"tails":4,"heads":6}}
 ```
 
 #### Response headers
@@ -135,7 +135,7 @@ curl http://localhost:5000/app/flip/call/:guess/
 #### Response body
 
 ```
-
+{"call":"heads","flip":"tails","result":"lose"}
 ```
 
 #### Response headers
@@ -176,7 +176,7 @@ Keep-Alive: timeout=5
 #### Request cURL
 
 ```
-curl -X POST -H 'Content-Type: application/json' -d '{"number":"30"}' http://localhost:5000/app/flip/coins/`
+curl -X POST -H 'Content-Type: application/json' -d '{"number":"30"}' http://localhost:5000/app/flip/coins/
 ```
 
 #### Response body
@@ -203,7 +203,7 @@ Keep-Alive: timeout=5
 #### Request cURL
 
 ```
-
+curl http://localhost:5000/app/log/access/
 ```
 
 #### Response body
