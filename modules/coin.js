@@ -76,11 +76,11 @@ function countFlips(array) {
   }
 
   if (heads != 0 && tails != 0) {
-    return {tails: tails, heads: heads};
+    return {"tails": tails, "heads": heads};
   } else if (heads == 0 && tails != 0) {
-    return {tails: tails};
+    return {"tails": tails};
   } else if (heads != 0 && tails == 0) {
-    return {heads: heads};
+    return {"heads": heads};
   } else {
     return {};
   }
@@ -104,7 +104,7 @@ function flipACoin(call) {
   } else {
     var result = "lose";
   }
-  return {call: call, flip: coin, result: result};
+  return {"call": call, "flip": coin, "result": result};
 }
 
 // export stuff

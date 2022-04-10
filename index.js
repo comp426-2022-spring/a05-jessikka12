@@ -82,17 +82,24 @@ app.get('/app/', (req, res) => {
 })
 
 app.get('/app/flip/', (req, res) => {
-    res.status(200).json({flip: coin.coinFlip()})
+    res.status(200).json({"flip": coin.coinFlip()})
 })
 
 app.get('/app/flips/:number', (req, res) => {
     const flips = coin.coinFlips(req.params.number)
-    res.status(200).json({raw: flips, summary: coin.countFlips(flips)})
+    res.status(200).json({"raw": flips, "summary": coin.countFlips(flips)})
 })
 
 app.get('/app/flip/call/:guess(heads|tails)/', (req, res) => {
     const result = coin.flipACoin(req.params.guess)
     res.status(200).json(result)
+})
+
+// define post endpoints
+app.post('/app/flip/coins/', (req, res, next) => {
+    const flips = coin.coinFlips(req.body.number)
+    const count = countFlips(flips)
+    res.status(200).json({"raw":flips, "summary":count})
 })
 
 // default response for any other request
