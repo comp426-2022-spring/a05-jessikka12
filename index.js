@@ -74,3 +74,28 @@ if (log == true) {
     app.use(morgan('combined', { stream: accessLog }))
 }
 
+
+// define get endpoints
+app.get('/app/', (req, res) => {
+    res.json({'message': "API working"})
+    res.status(200)
+})
+
+app.get('/app/flip/', (req, res) => {
+    res.status(200).json({flip: coin.coinFlip()})
+})
+
+app.get('/app/flips/:number', (req, res) => {
+    const flips = coin.coinFlips(req.params.number)
+    res.status(200).json({raw: flips, summary: coin.countFlips(flips)})
+})
+
+app.get('/app/flip/call/:guess(heads|tails)/', (req, res) => {
+    const result = coin.flipACoin(req.params.guess)
+    res.status(200).json(result)
+})
+
+// default response for any other request
+app.use(function(req, res){
+    res.status(404).end('404 NOT FOUND')
+})
