@@ -74,6 +74,9 @@ if (log == true) {
     app.use(morgan('combined', { stream: accessLog }))
 }
 
+// Make Express use its own built-in body parser
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // define get endpoints
 app.get('/app/', (req, res) => {
