@@ -78,6 +78,9 @@ if (log == true) {
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// Serve static HTML files
+app.use(express.static('./public'));
+
 // define get endpoints
 app.get('/app/', (req, res) => {
     res.json({"message":"Your API works! (200)"})
