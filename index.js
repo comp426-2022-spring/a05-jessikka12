@@ -4,6 +4,7 @@ const app = express()
 
 const fs = require('fs')
 const morgan = require('morgan')
+const cors = require('cors')
 const coin = require('./modules/coin')
 const db = require('./src/services/database.js')
 const midware = require('./src/middleware/mymiddleware.js')
@@ -77,6 +78,9 @@ if (log == true) {
 // Make Express use its own built-in body parser
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// Set up cors middleware on all endpoints
+app.use(cors())
 
 // Serve static HTML files
 app.use(express.static('./public'));
