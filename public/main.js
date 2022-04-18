@@ -12,9 +12,9 @@ async function hideDivs() {
 const single = document.getElementById('singlenav')
 single.addEventListener('click', flipCoin)
 
-async function flipCoin() {
+async function flipCoin(event) {
     const url = 'http://localhost:5000/app/flip/'
-    fetch(url, {mode: 'cors'})
+    fetch(url)
     .then(function(response) {
         return response.json()
     })
@@ -30,9 +30,15 @@ async function flipCoin() {
 // Enter number and press button to activate coin flip series
 const multi = document.getElementById('multinav')
 multi.addEventListener('click', unhide)
-
 async function unhide() {
     document.getElementById('multi').setAttribute('class', 'active')
+}
+
+const coinsForm = document.getElementById('coins')
+coinsForm.addEventListener('submit', flipCoins)
+
+async function flipCoins(event) {
+
 }
 
 // Guess a flip by clicking either heads or tails button
