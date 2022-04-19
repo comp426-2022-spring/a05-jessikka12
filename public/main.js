@@ -103,14 +103,16 @@ async function guessCoin(event) {
 
         console.log(result)
         document.getElementById('guessresult').setAttribute('class', 'visible')
-        // document.getElementById('result').innerText = result.flip
-        document.getElementById('winresult').setAttribute('class', result.result)
-        // document.getElementById('winresult').innerHTML = "YOU WIN!"
         if (result.result == 'win') {
-            document.getElementById('winresult').innerText = "YOU WIN!"
+            document.getElementById('guessresult').innerHTML = `
+            <p>Result: ` + result.flip +`</p>
+            <p><span style="color:green">YOU WIN!</span></p>
+            `
         } else {
-            document.getElementById('result').setAttribute('class', 'lose')
-            document.getElementById('winresult').innerText = "you lose :("
+            document.getElementById('guessresult').innerHTML = `
+            <p>Result: ` + result.flip + `</p>
+            <p><span style="color:red">you lose</span></p>
+            `
         }
         
     } catch(error) {
