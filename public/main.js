@@ -30,8 +30,8 @@ async function flipCoin(event) {
 // Flip multiple coins and show coin images in table as well as summary results
 // Enter number and press button to activate coin flip series
 const multi = document.getElementById('multinav')
-multi.addEventListener('click', getNumber)
-function getNumber() {
+multi.addEventListener('click', showMulti)
+function showMulti() {
     hideDivs()
     document.getElementById('multi').setAttribute('class', 'active')
 }
@@ -68,5 +68,19 @@ async function flipCoins(event) {
     }
 }
 
-
 // Guess a flip by clicking either heads or tails button
+const guess = document.getElementById('guessnav')
+guess.addEventListener('click', showGuess)
+function showGuess() {
+    hideDivs()
+    document.getElementById('guess').setAttribute('class', 'active')
+}
+
+const guessForm = document.getElementById('call')
+guessForm.addEventListener('submit', guessCoin)
+
+async function guessCoin(event) {
+    event.preventDefault()
+
+    const url = document.baseURI + 'app/flip/call/'
+}
