@@ -10,6 +10,14 @@ div.visible {
   display: table;
 }
 
+div.win {
+  color: greenyellow;
+}
+
+div.lose {
+  color: red;
+}
+
 img.bigcoin {
   width: 50px;
 }

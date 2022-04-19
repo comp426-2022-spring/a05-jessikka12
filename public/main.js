@@ -59,8 +59,7 @@ async function flipCoins(event) {
         
         console.log(flips)
         document.getElementById('multiresult').setAttribute('class', 'visible')
-        // todo: add if statement for if one is 0
-        document.getElementById('result').innerHTML = 'heads: ' + flips.summary.heads + ', tails: ' + flips.summary.tails
+        document.getElementById('result').innerHTML = JSON.stringify(flips.summary)
         // make table
     } catch (error) {
         console.log(error)
@@ -103,6 +102,17 @@ async function guessCoin(event) {
         })
 
         console.log(result)
+        document.getElementById('guessresult').setAttribute('class', 'visible')
+        // document.getElementById('result').innerText = result.flip
+        document.getElementById('winresult').setAttribute('class', result.result)
+        // document.getElementById('winresult').innerHTML = "YOU WIN!"
+        if (result.result == 'win') {
+            document.getElementById('winresult').innerText = "YOU WIN!"
+        } else {
+            document.getElementById('result').setAttribute('class', 'lose')
+            document.getElementById('winresult').innerText = "you lose :("
+        }
+        
     } catch(error) {
         console.log(error)
     }
