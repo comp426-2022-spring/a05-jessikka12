@@ -59,12 +59,25 @@ async function flipCoins(event) {
         
         console.log(flips)
         document.getElementById('multiresult').setAttribute('class', 'visible')
-        document.getElementById('result').innerHTML = JSON.stringify(flips.summary)
+        document.getElementById('multiresult').innerHTML = `
+        <p>Result: ` + JSON.stringify(flips.summary) +`</p>
+        `
         // make table
+        document.getElementById('multiresult').innerHTML += `
+        <th scope="col">Result</th><th scope="col">Coin</th>
+        `
+        for (var i = 0; i < flips.raw.length; i++) {
+            document.getElementById('multiresult').innerHTML += `
+            <tr>
+                <td style="text-align:center">` + flips.raw[i] + `</td><td><img class="smallcoin" src="assets/img/` + flips.raw[i] + `.png"></img></td>
+            </tr>
+            `
+        }
     } catch (error) {
         console.log(error)
     }
 }
+
 
 // Guess a flip by clicking either heads or tails button
 const guess = document.getElementById('guessnav')
@@ -111,7 +124,7 @@ async function guessCoin(event) {
         } else {
             document.getElementById('guessresult').innerHTML = `
             <p>Result: ` + result.flip + `</p>
-            <p><span style="color:red">you lose</span></p>
+            <p><span style="color:red">you lose :(</span></p>
             `
         }
         
