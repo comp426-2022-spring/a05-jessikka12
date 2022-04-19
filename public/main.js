@@ -46,9 +46,7 @@ async function flipCoins(event) {
 
     try {
         const formData = new FormData(event.currentTarget)
-        console.log(formData)
         const formDataJson = JSON.stringify(Object.fromEntries(formData))
-        console.log(formDataJson)
         const options = {
             method: "POST",
             headers: {"Content-Type": 'application/json', Accept: 'application/json'},
@@ -61,6 +59,7 @@ async function flipCoins(event) {
         
         console.log(flips)
         document.getElementById('multiresult').setAttribute('class', 'visible')
+        // todo: add if statement for if one is 0
         document.getElementById('result').innerHTML = 'heads: ' + flips.summary.heads + ', tails: ' + flips.summary.tails
         // make table
     } catch (error) {
@@ -83,4 +82,28 @@ async function guessCoin(event) {
     event.preventDefault()
 
     const url = document.baseURI + 'app/flip/call/'
+
+    try {
+        const formData = new FormData(event.currentTarget)
+        const formDataJson = Object.fromEntries(formData)
+        var input
+        if (parseInt(formDataJson.input) == 1) {
+            input = JSON.stringify({ 'guess': 'tails' })
+        } else {
+            input = JSON.stringify({ 'guess': 'heads'})
+        }
+        const options = {
+            method: "POST",
+            headers: {"Content-Type": 'application/json', Accept: 'application/json'},
+            body: input
+        }
+
+        const result = await fetch(url, options).then(function(response) {
+            return response.json()
+        })
+
+        console.log(result)
+    } catch(error) {
+        console.log(error)
+    }
 }

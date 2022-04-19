@@ -60,12 +60,17 @@
 
     <div id="guess" class="hidden">
       <form id="call">
-        <label for="input">
-          <strong>Heads or Tails?</strong>
-        </label>
-        <input type="range" id="input" name="input" min="0" max="1">
+        <p><strong>Heads or Tails?</strong></p>
+        <label for="input">Heads</label>
+        <input type="range" id="input" name="input" min="0" max="1" width="10px">
+        <label for="input">Tails</label>
         <input type="submit" value="Flip!">
       </form>
+
+      <div id="guessresult" class="hidden">
+        <p>Result: <span id="result"></span></p>
+        <!-- make table of pictures -->
+      </div>
     </div>
 
 	<script src="main.js"></script>
