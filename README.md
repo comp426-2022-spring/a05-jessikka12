@@ -129,13 +129,17 @@ curl http://localhost:5000/app/flip/coin/
 #### Response body
 
 ```
-
+404 NOT FOUND
 ```
 
 #### Response headers
 
 ```
-
+HTTP/1.1 404 Not Found
+X-Powered-By: Express
+Date: Tue, 19 Apr 2022 21:40:17 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
 ```
 
 ### /app/flip/call/:guess/ (GET)
@@ -230,7 +234,7 @@ curl http://localhost:5000/app/log/access/
 #### Response body
 
 ```
-[{"id":1,"remoteaddr":"::ffff:127.0.0.1","remoteuser":null,"time":"1649605406289.0","method":"GET","url":"/app/","protocol":"http","httpversion":"1.1","status":"200.0","referer":null,"useragent":"curl/7.74.0"},{"id":2,"remoteaddr":"::ffff:127.0.0.1","remoteuser":null,"time":"1649605412523.0","method":"GET","url":"/app/log/access","protocol":"http","httpversion":"1.1","status":"200.0","referer":null,"useragent":"curl/7.74.0"}]
+[{"id":1,"remoteaddr":"::ffff:127.0.0.1","remoteuser":null,"time":"1650404522431.0","method":"GET","url":"/app/log/access/","protocol":"http","httpversion":"1.1","status":"200.0","referer":null,"useragent":"curl/7.74.0"}]
 ```
 
 #### Response headers
@@ -239,9 +243,9 @@ curl http://localhost:5000/app/log/access/
 HTTP/1.1 200 OK
 X-Powered-By: Express
 Content-Type: application/json; charset=utf-8
-Content-Length: 650
-ETag: W/"28a-rhf6pLcd80uBnzlvWEJYLdxTZps"
-Date: Sun, 10 Apr 2022 15:44:22 GMT
+Content-Length: 442
+ETag: W/"1ba-PGp4niS906vVa5iGW6o3JYI+lAA"
+Date: Tue, 19 Apr 2022 21:44:28 GMT
 Connection: keep-alive
 Keep-Alive: timeout=5
 ```
@@ -257,35 +261,54 @@ curl http://localhost:5000/app/log/access/
 #### Response body
 
 ```
-
+404 NOT FOUND
 ```
 
 #### Response headers
 
 ```
-
+HTTP/1.1 404 Not Found
+X-Powered-By: Express
+Date: Tue, 19 Apr 2022 21:48:39 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
 ```
 
 ### /app/log/error/ (GET)
 
-_Not yet implemented_
-
 #### Request cURL
 
 ```
-
+curl http://localhost:5000/app/log/error/
 ```
 
 #### Response body
 
 ```
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Error: Error test successful.<br> &nbsp; &nbsp;at /home/jessikka12/comp426/a05-jessikka12/index.js:64:15<br> &nbsp; &nbsp;at Layer.handle [as handle_request] (/home/jessikka12/comp426/a05-jessikka12/node_modules/express/lib/router/layer.js:95:5)<br> &nbsp; &nbsp;at next (/home/jessikka12/comp426/a05-jessikka12/node_modules/express/lib/router/route.js:137:13)<br> &nbsp; &nbsp;at Route.dispatch (/home/jessikka12/comp426/a05-jessikka12/node_modules/express/lib/router/route.js:112:3)<br> &nbsp; &nbsp;at Layer.handle [as handle_request] (/home/jessikka12/comp426/a05-jessikka12/node_modules/express/lib/router/layer.js:95:5)<br> &nbsp; &nbsp;at /home/jessikka12/comp426/a05-jessikka12/node_modules/express/lib/router/index.js:281:22<br> &nbsp; &nbsp;at Function.process_params (/home/jessikka12/comp426/a05-jessikka12/node_modules/express/lib/router/index.js:341:12)<br> &nbsp; &nbsp;at next (/home/jessikka12/comp426/a05-jessikka12/node_modules/express/lib/router/index.js:275:10)<br> &nbsp; &nbsp;at Object.addData (/home/jessikka12/comp426/a05-jessikka12/src/middleware/mymiddleware.js:23:5)<br> &nbsp; &nbsp;at /home/jessikka12/comp426/a05-jessikka12/index.js:48:13</pre>
+</body>
+</html>
 ```
 
 #### Response headers
 
 ```
-
+HTTP/1.1 500 Internal Server Error
+X-Powered-By: Express
+Content-Security-Policy: default-src 'none'
+X-Content-Type-Options: nosniff
+Content-Type: text/html; charset=utf-8
+Content-Length: 1297
+Date: Tue, 19 Apr 2022 21:58:48 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
 ```
 
 ### /app/user/login/ (POST)

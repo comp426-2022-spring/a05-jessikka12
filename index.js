@@ -59,7 +59,7 @@ if (debug) {
     })
 
     // endpoint /app/error
-    app.get('/app/error', (req, res) => {
+    app.get('/app/log/error', (req, res) => {
         // error out
         throw new Error("Error test successful.")
     })
