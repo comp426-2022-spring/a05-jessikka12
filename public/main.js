@@ -42,15 +42,16 @@ coinsForm.addEventListener('submit', flipCoins)
 async function flipCoins(event) {
     event.preventDefault()
 
-    const endpoint = 'app/flip/coins/'
-    const url = document.baseURI + endpoint
+    const url = document.baseURI + 'app/flip/coins/'
 
     try {
         const formData = new FormData(event.currentTarget)
+        console.log(formData)
         const formDataJson = JSON.stringify(Object.fromEntries(formData))
+        console.log(formDataJson)
         const options = {
             method: "POST",
-            headers: {"Content-Type": 'application/json', Accpet: 'application/json'},
+            headers: {"Content-Type": 'application/json', Accept: 'application/json'},
             body: formDataJson
         }
 
@@ -60,7 +61,8 @@ async function flipCoins(event) {
         
         console.log(flips)
         document.getElementById('multiresult').setAttribute('class', 'visible')
-        document.getElementById('result').innerHTML = flips
+        document.getElementById('result').innerHTML = 'heads: ' + flips.summary.heads + ', tails: ' + flips.summary.tails
+        // make table
     } catch (error) {
         console.log(error)
     }
