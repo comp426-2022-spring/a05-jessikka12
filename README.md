@@ -1,18 +1,3 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-c66648af7eb3fe8bc4f294546bfd86ef473780cde1dea487d3c4ff354943c9ae.svg)](https://classroom.github.com/online_ide?assignment_repo_id=7569968&assignment_repo_type=AssignmentRepo)
-# a05 Human Interface
-
-In this assignment, you will build an HTML human interface for your API. You will also document your API endpoints and consider package structure.
-
-## DO NOT CLONE THIS REPOSITORY DIRECTLY
-
-Use the GitHub classroom link instead: https://classroom.github.com/a/PUVGxeMe
-
-If you clone this repo directly, it will not be added to the organization as an individual repo associated with your account and you will not be able to push to it.
-
-## Instructions
-
-Full instructions for this assignment are available at: https://comp426.johndmart.in/a/05/
-
 <!-- DELETE EVERYTHING ABOVE THIS LINE -->
 
 # Coinserver Description
@@ -84,19 +69,26 @@ Keep-Alive: timeout=5
 #### Request cURL
 
 ```
-
+curl http://localhost:5000/app/flip/
 ```
 
 #### Response body
 
 ```
-
+{"flip":"tails"}
 ```
 
 #### Response headers
 
 ```
-
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 16
+ETag: W/"10-N9e0DDykqBPnqphc8f4bzHcjsuM"
+Date: Sun, 10 Apr 2022 15:36:01 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
 ```
 
 ### /app/flips/:number/ (GET)
@@ -104,19 +96,26 @@ Keep-Alive: timeout=5
 #### Request cURL
 
 ```
-
+curl http://localhost:5000/app/flips/10/
 ```
 
 #### Response body
 
 ```
-
+{"raw":["heads","tails","tails","tails","heads","heads","heads","heads","tails","heads"],"summary":{"tails":4,"heads":6}}
 ```
 
 #### Response headers
 
 ```
-
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 121
+ETag: W/"79-ASADpBbRRst6F1e6lzOUFHThC3Y"
+Date: Sun, 10 Apr 2022 15:38:43 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
 ```
 
 ### /app/flip/coin/ (GET)
@@ -124,19 +123,23 @@ Keep-Alive: timeout=5
 #### Request cURL
 
 ```
-
+curl http://localhost:5000/app/flip/coin/
 ```
 
 #### Response body
 
 ```
-
+404 NOT FOUND
 ```
 
 #### Response headers
 
 ```
-
+HTTP/1.1 404 Not Found
+X-Powered-By: Express
+Date: Tue, 19 Apr 2022 21:40:17 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
 ```
 
 ### /app/flip/call/:guess/ (GET)
@@ -144,19 +147,26 @@ Keep-Alive: timeout=5
 #### Request cURL
 
 ```
-
+curl http://localhost:5000/app/flip/call/heads/
 ```
 
 #### Response body
 
 ```
-
+{"call":"heads","flip":"tails","result":"lose"}
 ```
 
 #### Response headers
 
 ```
-
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 46
+ETag: W/"2e-U/q8iZ4JKqczXPIvtwiVRpEFlRc"
+Date: Sun, 10 Apr 2022 15:39:45 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
 ```
 
 ### /app/flip/call/ (POST)
@@ -191,7 +201,7 @@ Keep-Alive: timeout=5
 #### Request cURL
 
 ```
-curl -X POST -H 'Content-Type: application/json' -d '{"number":"30"}' http://localhost:5000/app/flip/coins/`
+curl -X POST -H 'Content-Type: application/json' -d '{"number":"30"}' http://localhost:5000/app/flip/coins/
 ```
 
 #### Response body
@@ -218,19 +228,26 @@ Keep-Alive: timeout=5
 #### Request cURL
 
 ```
-
+curl http://localhost:5000/app/log/access/
 ```
 
 #### Response body
 
 ```
-
+[{"id":1,"remoteaddr":"::ffff:127.0.0.1","remoteuser":null,"time":"1650404522431.0","method":"GET","url":"/app/log/access/","protocol":"http","httpversion":"1.1","status":"200.0","referer":null,"useragent":"curl/7.74.0"}]
 ```
 
 #### Response headers
 
 ```
-
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: application/json; charset=utf-8
+Content-Length: 442
+ETag: W/"1ba-PGp4niS906vVa5iGW6o3JYI+lAA"
+Date: Tue, 19 Apr 2022 21:44:28 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
 ```
 
 ### /app/log/access/ (GET)
@@ -238,41 +255,60 @@ Keep-Alive: timeout=5
 #### Request cURL
 
 ```
-
+curl http://localhost:5000/app/log/access/
 ```
 
 #### Response body
 
 ```
-
+404 NOT FOUND
 ```
 
 #### Response headers
 
 ```
-
+HTTP/1.1 404 Not Found
+X-Powered-By: Express
+Date: Tue, 19 Apr 2022 21:48:39 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
 ```
 
 ### /app/log/error/ (GET)
 
-_Not yet implemented_
-
 #### Request cURL
 
 ```
-
+curl http://localhost:5000/app/log/error/
 ```
 
 #### Response body
 
 ```
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Error: Error test successful.<br> &nbsp; &nbsp;at /home/jessikka12/comp426/a05-jessikka12/index.js:64:15<br> &nbsp; &nbsp;at Layer.handle [as handle_request] (/home/jessikka12/comp426/a05-jessikka12/node_modules/express/lib/router/layer.js:95:5)<br> &nbsp; &nbsp;at next (/home/jessikka12/comp426/a05-jessikka12/node_modules/express/lib/router/route.js:137:13)<br> &nbsp; &nbsp;at Route.dispatch (/home/jessikka12/comp426/a05-jessikka12/node_modules/express/lib/router/route.js:112:3)<br> &nbsp; &nbsp;at Layer.handle [as handle_request] (/home/jessikka12/comp426/a05-jessikka12/node_modules/express/lib/router/layer.js:95:5)<br> &nbsp; &nbsp;at /home/jessikka12/comp426/a05-jessikka12/node_modules/express/lib/router/index.js:281:22<br> &nbsp; &nbsp;at Function.process_params (/home/jessikka12/comp426/a05-jessikka12/node_modules/express/lib/router/index.js:341:12)<br> &nbsp; &nbsp;at next (/home/jessikka12/comp426/a05-jessikka12/node_modules/express/lib/router/index.js:275:10)<br> &nbsp; &nbsp;at Object.addData (/home/jessikka12/comp426/a05-jessikka12/src/middleware/mymiddleware.js:23:5)<br> &nbsp; &nbsp;at /home/jessikka12/comp426/a05-jessikka12/index.js:48:13</pre>
+</body>
+</html>
 ```
 
 #### Response headers
 
 ```
-
+HTTP/1.1 500 Internal Server Error
+X-Powered-By: Express
+Content-Security-Policy: default-src 'none'
+X-Content-Type-Options: nosniff
+Content-Type: text/html; charset=utf-8
+Content-Length: 1297
+Date: Tue, 19 Apr 2022 21:58:48 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
 ```
 
 ### /app/user/login/ (POST)
